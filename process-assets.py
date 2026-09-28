@@ -48,6 +48,29 @@ bbox = logo.getbbox()
 logo = logo.crop(bbox) if bbox else logo
 logo.save(OUT / "ek-logo.png", optimize=True)
 
+# Preserve the real mark while providing a light-on-image brand variant for the hero masthead.
+light = logo.copy()
+light_pixels = []
+for r, g, b, a in light.getdata():
+    if a and r < 115 and g < 115 and b < 115:
+        light_pixels.append((255, 255, 255, a))
+    else:
+        light_pixels.append((r, g, b, a))
+light.putdata(light_pixels)
+light.save(OUT / "ek-logo-light.png", optimize=True)
+
+# Compact crop of the authentic EK symbol for small navigation surfaces.
+mark = logo.crop((0, 0, logo.width, max(1, round(logo.height * 0.62))))
+mark_bbox = mark.getbbox()
+mark = mark.crop(mark_bbox) if mark_bbox else mark
+mark.save(OUT / "ek-mark.png", optimize=True)
+mark_light = mark.copy()
+mark_light_pixels = []
+for r, g, b, a in mark_light.getdata():
+    mark_light_pixels.append((255, 255, 255, a) if a and r < 115 and g < 115 and b < 115 else (r, g, b, a))
+mark_light.putdata(mark_light_pixels)
+mark_light.save(OUT / "ek-mark-light.png", optimize=True)
+
 # Poster from the selected on-site video.
 video_poster = Image.open(SRC / sources["wall_clean"]).convert("RGB")
 video_poster = video_poster.crop((55, 170, 730, 1010))

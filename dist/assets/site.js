@@ -2,7 +2,7 @@ const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelect
 const header=$('#siteHeader'),progress=$('#progressBar'),navLinks=$$('.nav-link'),indicator=$('#navIndicator');
 let lastY=0,ticking=false;
 function setIndicator(el){if(!el||innerWidth<901)return;const track=$('#navTrack').getBoundingClientRect(),box=el.getBoundingClientRect();indicator.style.left=`${box.left-track.left}px`;indicator.style.width=`${box.width}px`}
-function onScroll(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max?y/max*100:0}%`;header.classList.toggle('hidden',y>lastY&&y>100);lastY=Math.max(0,y);ticking=false}
+function onScroll(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${max?y/max*100:0}%`;header.classList.toggle('scrolled',y>48);header.classList.toggle('hidden',y>lastY&&y>100);lastY=Math.max(0,y);ticking=false}
 addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(onScroll);ticking=true}},{passive:true});
 addEventListener('resize',()=>setIndicator($('.nav-link.active')));setIndicator($('.nav-link.active'));
 navLinks.forEach(link=>{link.addEventListener('mouseenter',()=>setIndicator(link));link.addEventListener('focus',()=>setIndicator(link))});$('#navTrack').addEventListener('mouseleave',()=>setIndicator($('.nav-link.active')));
