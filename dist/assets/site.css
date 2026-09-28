@@ -5,3 +5,38 @@
 .intro{overflow:hidden}
 .nav-quote{white-space:nowrap}
 @media(max-width:600px){.hero-notes{bottom:72px}}
+
+/* EK masthead refinement: full-width architectural rail, never a floating pill. */
+.site-header{top:0;background:rgba(245,245,242,.96);border-bottom:1px solid rgba(23,25,24,.16);backdrop-filter:blur(14px)}
+.track-nav{width:min(100%,1440px);height:76px;margin:0 auto;padding:0 24px;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--ink);grid-template-columns:210px 1fr 190px}
+.brand{width:170px;height:76px;position:relative;overflow:visible;align-items:center}
+.brand:before{content:"";position:absolute;left:-24px;top:0;bottom:0;width:4px;background:var(--red)}
+.brand img{width:148px;max-height:64px;object-fit:contain;filter:none}
+.nav-link{color:rgba(23,25,24,.62)}
+.nav-link:hover,.nav-link.active{color:var(--ink)}
+.nav-indicator{bottom:0}
+.nav-quote{background:var(--ink);color:#fff;border-radius:0;padding:14px 18px}
+.nav-quote:hover{background:var(--red)}
+
+/* Motion is progressive enhancement: content remains visible if observers or extensions fail. */
+.reveal{opacity:1;transform:none}
+.mask-reveal{clip-path:inset(0 0 0 0)}
+.motion-ready .reveal:not(.visible){opacity:0;transform:translateY(34px)}
+.motion-ready .reveal-left:not(.visible){transform:translateX(-25px)}
+.motion-ready .reveal-right:not(.visible){transform:translateX(25px)}
+.motion-ready .mask-reveal:not(.visible){clip-path:inset(0 100% 0 0)}
+
+@media(max-width:900px){
+  .track-nav{width:100%;height:68px;padding:0 16px;grid-template-columns:1fr auto}
+  .brand{height:68px;width:145px}
+  .brand:before{left:-16px}
+  .brand img{width:132px;max-height:58px}
+  .menu-toggle span{background:var(--ink)}
+  .mobile-menu{left:0;right:0;top:68px;border-radius:0;border-width:0 0 1px;background:rgba(23,25,24,.98)}
+}
+
+@media(max-width:600px){
+  .site-header{top:0}
+  .track-nav{border-radius:0}
+  .hero{padding-top:0}
+}

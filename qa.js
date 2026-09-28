@@ -35,7 +35,18 @@ const baseUrl = process.env.SITE_URL || 'http://localhost:4173';
   await interaction.waitForTimeout(500);
   await interaction.evaluate(() => document.querySelector('.project').click());
   const modalOpen = await interaction.locator('#projectModal').evaluate(el => el.open);
-  results.push({ interactions: { menuOpen: menuOpen === 'false', modalOpen } });
+  await interaction.goto(`${baseUrl}/#motion`, { waitUntil: 'domcontentloaded', timeout: 15000 });
+  await interaction.waitForTimeout(1700);
+  const restoredSection = await interaction.evaluate(() => {
+    const copy = document.querySelector('.motion-copy');
+    const frame = document.querySelector('.video-frame');
+    return {
+      copyOpacity: getComputedStyle(copy).opacity,
+      frameClip: getComputedStyle(frame).clipPath,
+      sectionHeight: Math.round(document.querySelector('.motion-section').getBoundingClientRect().height)
+    };
+  });
+  results.push({ interactions: { menuOpen: menuOpen === 'false', modalOpen, restoredSection } });
   console.log(JSON.stringify(results, null, 2));
   await browser.close();
 })().catch(error => { console.error(error); process.exit(1); });
