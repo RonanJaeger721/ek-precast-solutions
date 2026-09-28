@@ -35,9 +35,11 @@ const baseUrl = process.env.SITE_URL || 'http://localhost:4173';
   await interaction.waitForTimeout(500);
   await interaction.evaluate(() => document.querySelector('.project').click());
   const modalOpen = await interaction.locator('#projectModal').evaluate(el => el.open);
-  await interaction.goto(`${baseUrl}/#motion`, { waitUntil: 'domcontentloaded', timeout: 15000 });
-  await interaction.waitForTimeout(1700);
-  const restoredSection = await interaction.evaluate(() => {
+  await interaction.locator('#projectModal .modal-close').click();
+  const restoredPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await restoredPage.goto(`${baseUrl}/#motion`, { waitUntil: 'domcontentloaded', timeout: 15000 });
+  await restoredPage.waitForTimeout(1700);
+  const restoredSection = await restoredPage.evaluate(() => {
     const copy = document.querySelector('.motion-copy');
     const frame = document.querySelector('.video-frame');
     return {
@@ -46,6 +48,7 @@ const baseUrl = process.env.SITE_URL || 'http://localhost:4173';
       sectionHeight: Math.round(document.querySelector('.motion-section').getBoundingClientRect().height)
     };
   });
+  await restoredPage.close();
   results.push({ interactions: { menuOpen: menuOpen === 'false', modalOpen, restoredSection } });
   console.log(JSON.stringify(results, null, 2));
   await browser.close();

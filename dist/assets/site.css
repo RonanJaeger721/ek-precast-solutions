@@ -116,3 +116,45 @@
   .process-track{padding:36px 22px 26px 52px}
   .process-line{left:22px}
 }
+
+/* Responsive type fit and reversible direction-aware motion. */
+h1,h2,h3,.service-row strong,.hero-notes strong{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.hero-notes strong{line-height:1.25}
+.service-row strong{min-width:0;line-height:1.22}
+.cta-panel h2{max-width:12ch}
+.cta-actions .button{line-height:1.3;text-align:center}
+.motion-ready.scrolling-up .reveal:not(.visible){transform:translateY(-26px)}
+.motion-ready.scrolling-down .reveal:not(.visible){transform:translateY(34px)}
+.motion-ready .reveal-left:not(.visible){transform:translateX(-25px)}
+.motion-ready .reveal-right:not(.visible){transform:translateX(25px)}
+.image-frame img,.why-bg img,.cta-frame>img{transform:translateY(var(--media-shift,0));transition:transform .8s var(--ease)}
+
+@media(max-width:900px){
+  .intro-layout{grid-template-columns:1fr;gap:30px}
+  .intro-copy{max-width:680px}
+  .section-heading-row{grid-template-columns:1fr;gap:18px}
+  .section-heading-row>p{max-width:520px}
+  .process-head{display:grid;grid-template-columns:1fr;gap:18px}
+  .process-head p{max-width:520px}
+  .hero-copy{padding-bottom:190px}
+  .hero-notes{left:0;right:0;bottom:28px;width:100%;grid-template-columns:repeat(3,1fr);gap:10px}
+  .hero-notes div,.hero-notes div:first-child{grid-column:auto;min-height:74px;display:flex;flex-direction:column;align-items:flex-start;padding:14px}
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:clamp(2.45rem,11vw,2.9rem);line-height:1.02;max-width:8.5ch}
+  .hero-lead{max-width:34ch;line-height:1.55}
+  .hero-notes strong{font-size:8.5px;letter-spacing:.035em}
+  .service-row{grid-template-columns:36px minmax(0,1fr) 24px}
+  .service-row strong{font-size:15px}
+  .value-panels h3{line-height:1.25}
+  .cta-panel h2{font-size:clamp(1.85rem,8.6vw,2.3rem)}
+  .cta-actions .button{white-space:normal;padding-inline:12px}
+}
+
+@media(max-width:340px){
+  .hero h1{font-size:2.35rem}
+  .hero-actions{gap:7px}
+  .hero-actions .button{font-size:10px;padding-inline:12px}
+  .hero-notes strong{font-size:8px}
+}
