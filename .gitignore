@@ -4,3 +4,6 @@ desktop.png
 mobile.png
 tablet.png
 __pycache__/
+
+.vercel
+.env*

@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ek-precast-solutions.vercel.app/sitemap.xml
