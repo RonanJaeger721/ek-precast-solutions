@@ -1,0 +1,6 @@
+.vercel/
+.openai/
+desktop.png
+mobile.png
+tablet.png
+__pycache__/
